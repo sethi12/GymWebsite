@@ -57,14 +57,14 @@ const checkMeals = async () => {
             const mealTime = meal.time.trim().toUpperCase();
 
             console.log(
-              `${memberData.userid} | ${meal.mealName} | ${mealTime}`
+              `${memberData.userid} | ${meal.mealName} | ${mealTime}`,
             );
 
             if (mealTime !== currentTime) continue;
 
             if (lastNotifications[meal.mealName] === today) {
               console.log(
-                `⏩ Already Sent : ${memberData.userid} -> ${meal.mealName}`
+                `⏩ Already Sent : ${memberData.userid} -> ${meal.mealName}`,
               );
               continue;
             }
@@ -82,6 +82,11 @@ ${meal.recipe.title}
 💪 ${meal.protein}g Protein
 
 Tap to view recipe`,
+              },
+              webpush: {
+                fcmOptions: {
+                  link: "https://gym-website-two-henna.vercel.app",
+                },
               },
 
               data: {
@@ -102,7 +107,7 @@ Tap to view recipe`,
                     [meal.mealName]: today,
                   },
                 },
-                { merge: true }
+                { merge: true },
               );
 
               matchedMeals.push({
@@ -113,13 +118,10 @@ Tap to view recipe`,
               });
 
               console.log(
-                `✅ Sent ${meal.mealName} notification to ${memberData.userid}`
+                `✅ Sent ${meal.mealName} notification to ${memberData.userid}`,
               );
             } catch (err) {
-              console.error(
-                `❌ Failed for ${memberData.userid}`,
-                err.message
-              );
+              console.error(`❌ Failed for ${memberData.userid}`, err.message);
             }
           }
         }

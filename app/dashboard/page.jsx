@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { getFCMToken } from "@/lib/firebaseMessaging";
 import { initializeForegroundNotifications } from "@/lib/notificationListener";
+import WorkoutPage from "../components/workoutlist";
 export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [diets, setDiets] = useState([]);
@@ -447,14 +448,16 @@ useEffect(() => {
           </motion.div>
         )}
 
-        {/* WORKOUT INTERACTIVE LOG SPACE */}
-        {selected === "workout" && (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center py-20 bg-neutral-900/20 border border-white/5 rounded-3xl backdrop-blur-md max-w-lg mx-auto p-6">
-            <BrainCircuit className="w-12 h-12 text-blue-500 mx-auto mb-4 animate-pulse" />
-            <h3 className="text-xl font-black tracking-tight mb-2">Kinetic Trajectory Calibration</h3>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">RoboCoach computer-vision movement tracking grids are computing data models. Neural maps loading shortly.</p>
-          </motion.div>
-        )}
+    {/* WORKOUT PAGE */}
+{selected === "workout" && (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="w-full"
+  >
+    <WorkoutPage />
+  </motion.div>
+)}
 
       </div>
     </div>
